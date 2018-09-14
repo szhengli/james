@@ -1,0 +1,15 @@
+mvn clean install -U
+cd /root/.jenkins/workspace/trade129/webserver/target
+#scp -p webserver-0.0.1-SNAPSHOT.jar root@192.168.10.22:/opt/codejar/webserver
+scp -p webserver-0.0.1-SNAPSHOT.jar root@192.168.10.129:/opt/chinayie/trade
+ssh root@192.168.10.129 "cd /opt/chinayie/trade ; sh run.sh"
+echo "$BUILD_NUMBER" > version.txt
+
+
+
+
+
+
+
+
+scp -p  root@192.168.10.248:/root/.jenkins/workspace/trade129/webserver/target/version.txt  /opt/chinayie/trade
