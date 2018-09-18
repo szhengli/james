@@ -1,7 +1,12 @@
+#!//usr/bin/bash
 
 source /opt/lib.sh
 
+# The deployment target server
 HOST=192.168.33.200
+
+
+# The JARs home 
 HOME=/opt/chinayie
 
 #Jar Path
@@ -20,7 +25,10 @@ COM_J=`get_file $COM common_service`
 PLA_J=`get_file $PLA  platform_mgmt`
 SOC_J=`get_file $SOC  socketIO_server`
 
+# the startup script to be run on the target server
 CMD="sh run.sh"
+
+# the command to check if the deployment of a specific package is successful
 CHECK="[ `echo $?` -eq 0 ] && echo ok || echo bad"
 
 

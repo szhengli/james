@@ -1,4 +1,7 @@
 
+# To retrive the right file name, based on the maximum of the buid_number embeded in the 
+# file name
+
 get_file() {
        DIR=$1
        MOD=$2
