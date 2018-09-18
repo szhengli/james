@@ -1,5 +1,7 @@
-HOST=192.168.10.132
 
+source /opt/lib.sh
+
+HOST=192.168.33.200
 HOME=/opt/chinayie
 
 #Jar Path
@@ -11,29 +13,39 @@ PLA=$HOME/platform-mgmt
 SOC=$HOME/socketIO-server
 
 #Jar file
-TRA_J=webserver-0.0.1-SNAPSHOT.jar
-TRT_J=trade-task.jar
-PAY_J=gy_pay.jar
-COM_J=common-service.jar
-PLA_J=platform-mgmt.jar
-#SOC-J=socketIO-server.jar
+TRA_J=`get_file $TRA trades`
+TRT_J=`get_file $TRT trade_task`
+PAY_J=`get_file $PAY gy_pay`
+COM_J=`get_file $COM common_service`
+PLA_J=`get_file $PLA  platform_mgmt`
+SOC_J=`get_file $SOC  socketIO_server`
 
 CMD="sh run.sh"
 CHECK="[ `echo $?` -eq 0 ] && echo ok || echo bad"
 
 
+scp $SOC/$SOC_J $HOST:/$SOC/ ; ssh $HOST "cd $SOC;  $CMD"
+echo "Deploy Trade:"
+eval  $CHECK
 
-#scp $SOC/$SOC_J $HOST:/$SOC/ ; ssh $HOST "cd $SOC;  $CMD"
-#eval  $CHECK
 scp $TRA/$TRA_J $HOST:/$TRA/ ; ssh $HOST "cd $TRA;  $CMD"
+echo "Deploy Trade:"
 eval  $CHECK
+
 scp $TRT/$TRT_J $HOST:/$TRT/ ; ssh $HOST "cd $TRT;  $CMD"
+echo "Deploy Trade_task:"
 eval  $CHECK
+
 scp $PAY/$PAY_J $HOST:/$PAY/ ; ssh $HOST "cd $PAY;  $CMD"
+echo "Deploy gy_pay:"
 eval  $CHECK
+
 scp $COM/$COM_J $HOST:/$COM/ ; ssh $HOST "cd $COM;  $CMD"
+echo "Deploy common_service:"
 eval  $CHECK
+
 scp $PLA/$PLA_J $HOST:/$PLA/ ; ssh $HOST "cd $PLA;  $CMD"
+echo "platform_mgmt:"
 eval  $CHECK
 
 
