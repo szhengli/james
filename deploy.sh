@@ -1,4 +1,4 @@
-#!//usr/bin/bash
+#!/usr/bin/bash
 
 source /opt/lib.sh
 
